@@ -12,7 +12,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { OfflineVideo } from "./offline-video";
 import { LoadingVideo } from "./loading-video";
 import { LiveVideo } from "./live-video";
-// import { LiveVideo } from "./live-video";
 
 interface VideoProps {
   hostName: string;
