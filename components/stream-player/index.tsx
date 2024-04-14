@@ -26,11 +26,11 @@ type CustomStream = {
 
 type CustomUser = {
   id: string;
-  username: string;
+  username: string | null;
   bio: string | null;
   stream: CustomStream | null;
-  imageUrl: string;
-  _count: { followedBy: number }
+  image: string | null;
+  _count: { followedBy: number };
 };
 
 interface StreamPlayerProps {
@@ -67,12 +67,12 @@ export const StreamPlayer = ({
         )}
       >
         <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
-          <Video hostName={user.username} hostIdentity={user.id} />
+          <Video hostName={user.username!} hostIdentity={user.id} />
           <Header
-            hostName={user.username}
+            hostName={user.username!}
             hostIdentity={user.id}
             viewerIdentity={identity}
-            imageUrl={user.imageUrl}
+            imageUrl={user.image!}
             isFollowing={isFollowing}
             name={stream.name}
           />
@@ -83,7 +83,7 @@ export const StreamPlayer = ({
             thumbnailUrl={stream.thumbnailUrl}
           />
           <AboutCard
-            hostName={user.username}
+            hostName={user.username!}
             hostIdentity={user.id}
             viewerIdentity={identity}
             bio={user.bio}
@@ -93,7 +93,7 @@ export const StreamPlayer = ({
         <div className={cn("col-span-1", collapsed && "hidden")}>
           <Chat
             viewerName={name}
-            hostName={user.username}
+            hostName={user.username!}
             hostIdentity={user.id}
             isFollowing={isFollowing}
             isChatEnabled={stream.isChatEnabled}

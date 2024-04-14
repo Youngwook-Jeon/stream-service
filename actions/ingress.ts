@@ -48,9 +48,9 @@ export const createIngress = async (ingressType: IngressInput) => {
   await resetIngresses(self.id);
 
   const options: CreateIngressOptions = {
-    name: self.username,
+    name: self.username!,
     roomName: self.id,
-    participantName: self.username,
+    participantName: self.username!,
     participantIdentity: self.id,
   };
 

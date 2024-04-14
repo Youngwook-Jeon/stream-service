@@ -1,8 +1,11 @@
-import { SignInButton, UserButton, currentUser } from "@clerk/nextjs";
 import { Clapperboard } from "lucide-react";
 import Link from "next/link";
 
+import { currentUser } from "@/lib/auth";
+
 import { Button } from "@/components/ui/button";
+import { UserButton } from "@/components/auth/user-button";
+import { SignInButton } from "@/components/auth/signin-button";
 
 export default async function Actions() {
   const user = await currentUser();
@@ -10,9 +13,7 @@ export default async function Actions() {
   return (
     <div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">
       {!user && (
-        <SignInButton>
-          <Button size="sm" variant="primary">SignIn</Button>
-        </SignInButton>
+        <SignInButton />
       )}
       {!!user && (
         <div className="flex items-center gap-x-4">
@@ -27,7 +28,7 @@ export default async function Actions() {
               <span className="hidden lg:block">Dashboard</span>
             </Link>
           </Button>
-          <UserButton afterSignOutUrl="/" />
+          <UserButton />
         </div>
       )}
     </div>

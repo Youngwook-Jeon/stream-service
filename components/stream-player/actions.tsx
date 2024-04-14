@@ -2,11 +2,11 @@
 
 import { toast } from "sonner";
 import { Heart } from "lucide-react";
-import { useTransition } from "react";
-import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-
+import { useTransition } from "react";
+import { useAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
+
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { onFollow, onUnfollow } from "@/actions/follow";
@@ -24,7 +24,7 @@ export const Actions = ({
 }: ActionsProps) => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const { userId } = useAuth();
+  const user = useAuth();
 
   const handleFollow = () => {
     startTransition(() => {
@@ -47,7 +47,7 @@ export const Actions = ({
   };
 
   const toggleFollow = () => {
-    if (!userId) {
+    if (!user) {
       return router.push("/sign-in");
     }
 

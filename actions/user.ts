@@ -11,13 +11,20 @@ export const updateUser = async (values: Partial<User>) => {
 
   const validData = {
     bio: values.bio,
+    username: values.username,
+    image: values.image,
   };
+
+  if (validData.username === "" || validData.username === null) {
+    throw new Error("Username is required");
+  }
 
   const user = await db.user.update({
     where: { id: self.id },
     data: { ...validData },
   });
 
+  revalidatePath("/");
   revalidatePath(`/${self.username}`);
   revalidatePath(`/u/${self.username}`);
 
